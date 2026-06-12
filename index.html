@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday Jhingur</title>
+    
+    <!-- Tailwind CSS via CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'neon-blue': '#00f3ff',
+                        'neon-purple': '#b026ff',
+                        'neon-pink': '#ff00ea',
+                        'neon-gold': '#ffd700',
+                        'bg-dark': '#0a0a0f',
+                        'foreground': '#ededed',
+                    },
+                    fontFamily: {
+                        sans: ['ui-sans-serif', 'system-ui', 'sans-serif'],
+                        mono: ['ui-monospace', 'SFMono-Regular', 'Menlo', 'Monaco', 'Consolas', 'monospace'],
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="styles.css">
+    
+    <!-- Feather Icons for lightweight icons -->
+    <script src="https://unpkg.com/feather-icons"></script>
+    
+    <!-- Canvas Confetti -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    
+    <!-- Three.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+</head>
+<body class="min-h-screen bg-bg-dark text-foreground selection:bg-neon-blue selection:text-black relative overflow-x-hidden font-sans">
+
+    <!-- Persistent Background Noise -->
+    <div class="bg-noise"></div>
+
+    <!-- Opening Sequence -->
+    <div id="opening-sequence" class="fixed inset-0 z-50 flex items-center justify-center bg-black transition-opacity duration-1000 font-mono">
+        <div id="terminal-text" class="text-neon-blue text-xl md:text-3xl text-center flex flex-col gap-4">
+            <!-- Text lines injected via JS -->
+        </div>
+        <div id="opening-finale" class="hidden flex-col items-center">
+            <h1 class="text-6xl md:text-8xl font-black text-transparent bg-clip-text bg-gradient-to-r from-neon-blue via-neon-purple to-neon-pink drop-shadow-[0_0_20px_rgba(0,243,255,0.8)] uppercase text-center animate-pulse">
+                HAPPY BIRTHDAY<br/>JHINGUR
+            </h1>
+            <button id="start-btn" class="mt-12 px-8 py-4 bg-transparent border-2 border-neon-blue text-neon-blue font-bold tracking-widest uppercase hover:bg-neon-blue hover:text-black transition-colors rounded-lg shadow-[0_0_20px_rgba(0,243,255,0.4)]">
+                Start Adventure
+            </button>
+        </div>
+    </div>
+
+    <!-- Main Content Container (Hidden initially) -->
+    <div id="main-content" class="hidden flex flex-col gap-24 md:gap-40 relative z-10 w-full pt-20">
+        
+        <!-- Statistics Center -->
+        <section id="statistics-center" class="py-24 relative z-10 w-full max-w-7xl mx-auto px-4 font-mono">
+            <div class="text-center mb-16">
+                <div class="inline-block px-8 py-4 border-2 border-neon-blue bg-neon-blue/10 rounded shadow-[0_0_20px_rgba(0,243,255,0.4)]">
+                    <h2 class="text-3xl md:text-5xl font-black uppercase tracking-[0.2em] text-neon-blue opacity-0 scale-75 transition-all duration-1000" id="legend-profile-title">
+                        Legend Profile
+                    </h2>
+                </div>
+            </div>
+            <div id="stats-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Stats injected via JS -->
+            </div>
+        </section>
+
+        <!-- Awesome Qualities -->
+        <section id="awesome-qualities" class="py-24 relative z-10 w-full max-w-6xl mx-auto px-4 font-mono">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-6xl font-black mb-4 uppercase tracking-widest text-transparent bg-clip-text bg-gradient-to-r from-neon-blue to-neon-purple drop-shadow-[0_0_10px_rgba(0,243,255,0.3)]">
+                    Why Jhingur is Special
+                </h2>
+                <p class="text-xl text-gray-400">Classified Data Files</p>
+            </div>
+            <div class="flex flex-wrap justify-center gap-8" id="qualities-container">
+                <!-- Cards injected via JS -->
+            </div>
+        </section>
+
+        <!-- Secret Vault -->
+        <section id="secret-vault" class="py-32 relative z-10 w-full min-h-[80vh] flex flex-col items-center justify-center font-mono">
+            <div id="vault-glow" class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full blur-[150px] transition-all duration-1000 z-0 bg-neon-blue/10"></div>
+            
+            <div class="relative z-10 w-full max-w-6xl mx-auto px-4 flex flex-col items-center" id="vault-content">
+                <!-- Vault Door -->
+                <div id="vault-door" class="flex flex-col items-center group w-full transition-all duration-1000">
+                    <h2 class="text-4xl md:text-5xl font-mono text-neon-blue mb-12 tracking-[0.2em] uppercase text-center shadow-neon-blue/50 drop-shadow-[0_0_10px_#00f3ff]">
+                        Secret Vault
+                    </h2>
+                    
+                    <div class="relative w-64 h-64 md:w-80 md:h-80 rounded-full border-8 border-gray-800 bg-gray-900 flex items-center justify-center shadow-[0_0_50px_rgba(0,0,0,0.8)] group-hover:border-neon-blue group-hover:shadow-[0_0_50px_rgba(0,243,255,0.4)] transition-all duration-500">
+                        <div class="absolute inset-4 rounded-full border border-dashed border-gray-600 group-hover:border-neon-blue/50 animate-spin-slow"></div>
+                        <div class="absolute inset-8 rounded-full border-2 border-dotted border-gray-500 group-hover:border-neon-purple/50 animate-spin-slow-reverse"></div>
+
+                        <div class="relative z-10 bg-black border-2 border-white/10 p-8 rounded-full flex flex-col items-center justify-center gap-4 group-hover:border-neon-blue transition-colors">
+                            <i data-feather="lock" class="text-gray-400 group-hover:text-neon-blue transition-colors duration-300 w-12 h-12"></i>
+                            <span class="text-gray-400 font-bold tracking-widest text-sm group-hover:text-neon-blue transition-colors duration-300">LOCKED</span>
+                        </div>
+                    </div>
+
+                    <div class="mt-12 text-center w-full max-w-md mx-auto">
+                        <div class="bg-black/40 border border-neon-blue/30 p-6 rounded-lg backdrop-blur-sm shadow-[0_0_20px_rgba(0,243,255,0.1)]">
+                            <p class="text-neon-blue font-mono mb-4 text-sm md:text-base leading-relaxed">
+                                <span class="text-neon-pink font-bold">[SECURITY PROTOCOL ACTIVE]</span><br/><br/>
+                                To enter, you must solve the riddle:<br/>
+                                "I survive all chaos, I make noise in the silence, and I am the legend this vault was built for. What is my name?"
+                            </p>
+                            <form id="vault-form" class="flex gap-2">
+                                <input id="vault-input" type="text" placeholder="Enter passcode..." class="w-full bg-black/50 border border-neon-blue/50 rounded px-4 py-2 text-white font-mono focus:outline-none focus:border-neon-blue" />
+                                <button type="submit" class="bg-neon-blue/20 text-neon-blue border border-neon-blue/50 px-4 py-2 rounded hover:bg-neon-blue hover:text-black transition-colors font-bold">ENTER</button>
+                            </form>
+                            <p id="vault-error" class="text-red-500 text-xs mt-3 font-mono uppercase animate-pulse hidden">Access Denied. Incorrect Passcode.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Vault Opened (Hidden initially) -->
+                <div id="vault-opened" class="w-full hidden opacity-0 transition-opacity duration-1000">
+                    <div class="text-center mb-16">
+                        <i data-feather="unlock" class="mx-auto text-neon-gold mb-6 w-16 h-16 drop-shadow-[0_0_15px_rgba(255,215,0,0.8)]"></i>
+                        <h2 class="text-5xl md:text-7xl font-black mb-4 text-gradient-gold uppercase tracking-[0.2em]">
+                            Vault Opened
+                        </h2>
+                        <p class="text-xl text-neon-blue font-mono tracking-widest uppercase">Decrypted Messages</p>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="vault-messages">
+                        <!-- Messages injected via JS -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Birthday Letter -->
+        <section id="birthday-letter" class="py-32 relative z-10 w-full max-w-4xl mx-auto px-4 flex flex-col items-center">
+            <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-neon-purple/20 via-bg-dark to-bg-dark z-0 blur-3xl pointer-events-none"></div>
+            
+            <div class="relative z-10 w-full opacity-0 translate-y-10 transition-all duration-1000" id="letter-container">
+                <div class="glass-panel p-8 md:p-16 relative overflow-hidden shadow-[0_0_50px_rgba(176,38,255,0.2)] rounded-2xl">
+                    <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-neon-gold to-transparent"></div>
+                    <div class="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-neon-pink to-transparent"></div>
+                    
+                    <div class="flex justify-center mb-12">
+                        <div class="p-4 rounded-full bg-white/5 border border-white/10 text-neon-gold">
+                            <i data-feather="mail" class="w-10 h-10"></i>
+                        </div>
+                    </div>
+
+                    <div class="text-lg md:text-2xl text-gray-200 leading-relaxed font-serif whitespace-pre-wrap min-h-[500px]" id="typewriter-output">
+                        <!-- Text typed by JS -->
+                        <span id="typewriter-cursor" class="animate-pulse ml-1 text-neon-blue hidden">_</span>
+                    </div>
+                    
+                    <div id="letter-end" class="mt-16 text-right hidden opacity-0 transition-opacity duration-1000">
+                        <p class="font-mono text-neon-blue text-sm uppercase tracking-widest">End of Transmission</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Sections below Letter (Hidden until letter finishes) -->
+        <div id="post-letter-content" class="hidden flex-col gap-24 md:gap-40">
+            <!-- Forbidden Button -->
+            <section id="forbidden-button" class="py-32 relative z-10 w-full flex flex-col items-center justify-center min-h-[60vh] font-mono">
+                <div id="forbidden-wrapper" class="relative z-10 w-full max-w-4xl mx-auto px-4 flex flex-col items-center text-center transition-all duration-500">
+                    <div id="forbidden-initial-state" class="flex flex-col items-center opacity-0 scale-50 transition-all duration-500">
+                        <div class="mb-12 animate-pulse flex items-center gap-4 text-red-500">
+                            <i data-feather="alert-triangle" class="w-12 h-12"></i>
+                            <span class="text-2xl font-black uppercase tracking-[0.2em]">Restricted Area</span>
+                            <i data-feather="alert-triangle" class="w-12 h-12"></i>
+                        </div>
+                        
+                        <button id="the-button" class="relative group w-64 h-64 md:w-80 md:h-80 rounded-full bg-red-600 border-[12px] border-red-900 shadow-[0_0_100px_rgba(255,0,0,0.8)] hover:bg-red-500 hover:shadow-[0_0_200px_rgba(255,0,0,1)] hover:border-red-800 transition-all duration-300 active:scale-95 cursor-pointer">
+                            <div class="absolute inset-0 rounded-full bg-gradient-to-b from-white/30 to-transparent pointer-events-none"></div>
+                            <span class="text-4xl md:text-6xl font-black text-white uppercase tracking-widest drop-shadow-[0_4px_4px_rgba(0,0,0,0.8)] leading-tight flex flex-col items-center justify-center w-full h-full">
+                                <span>DO NOT</span>
+                                <span>PRESS</span>
+                            </span>
+                        </button>
+                    </div>
+
+                    <div id="forbidden-pressed-state" class="hidden glass-panel p-12 border-[4px] border-red-500 shadow-[0_0_150px_rgba(255,0,0,0.6)] opacity-0 scale-50 transition-all duration-500">
+                        <div class="text-center">
+                            <div class="text-red-500 text-2xl font-black uppercase tracking-widest mb-4 animate-pulse">
+                                System Override Detected
+                            </div>
+                            <h2 class="text-4xl md:text-6xl font-black text-white uppercase tracking-[0.2em] leading-tight drop-shadow-[0_0_20px_rgba(255,0,0,0.8)]">
+                                🎂 Birthday Protocol<br/>Activated 🎂
+                            </h2>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Grand Finale -->
+            <section id="grand-finale" class="relative w-full min-h-screen bg-black overflow-hidden font-mono">
+                <!-- Three JS Canvas injected here -->
+                <div id="three-canvas-container" class="absolute inset-0 z-0 pointer-events-none"></div>
+
+                <!-- Shooting Stars -->
+                <div class="absolute inset-0 z-0 pointer-events-none">
+                    <div class="w-[2px] h-[150px] bg-gradient-to-b from-white to-transparent absolute top-10 left-[20%] rotate-45 opacity-0 animate-shooting-star" style="animation-duration: 4s; animation-delay: 1s;"></div>
+                    <div class="w-[2px] h-[150px] bg-gradient-to-b from-white to-transparent absolute top-20 right-[30%] -rotate-45 opacity-0 animate-shooting-star" style="animation-duration: 5s; animation-delay: 3s;"></div>
+                    <div class="w-[2px] h-[150px] bg-gradient-to-b from-white to-transparent absolute top-40 left-[50%] rotate-45 opacity-0 animate-shooting-star" style="animation-duration: 3s; animation-delay: 2s;"></div>
+                </div>
+
+                <!-- Lanterns Container -->
+                <div id="lanterns-container" class="absolute inset-0 z-10 pointer-events-none overflow-hidden hidden"></div>
+
+                <div class="relative z-20 w-full max-w-5xl mx-auto px-4 text-center flex flex-col items-center justify-center min-h-screen" id="finale-text-container">
+                    <!-- Text steps injected by JS -->
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <!-- Script -->
+    <script src="script.js"></script>
+    <script>
+        // Initialize Feather Icons
+        feather.replace();
+    </script>
+</body>
+</html>
